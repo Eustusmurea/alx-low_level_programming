@@ -1,4 +1,10 @@
 #ifndef main_h
+   /**
+         * main - print _putchar
+	 * is written by Eutus
+	 * Return: 0
+	 */
+
 	#define main_h
 
 
