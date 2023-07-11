@@ -20,7 +20,6 @@ void close_elf(int elf);
 /**
  * check_elf - Checks if a file is an ELF file.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
- *
  * Description: If the file is not an ELF file, exits with code 98.
  */
 
@@ -44,7 +43,6 @@ void check_elf(unsigned char *e_ident)
 /**
  * print_magic - Prints the magic numbers of an ELF header.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
- *
  * Description: The magic numbers are printed, separated by spaces.
  */
 
@@ -68,7 +66,6 @@ void print_magic(unsigned char *e_ident)
 /**
  * print_class - Prints the class of an ELF header.
  * @e_ident: A pointer to an array containing the ELF class.
- *
  * Description: The ELF class is printed.
  */
 
@@ -117,9 +114,9 @@ void print_data(unsigned char *e_ident)
 }
 
 /**
- *  * print_version - Prints the version of an ELF header.
- *   * @e_ident: A pointer to an array containing the ELF version.
- *    */
+* print_version - Prints the version of an ELF header.
+* @e_ident: A pointer to an array containing the ELF version.
+ */
 void print_version(unsigned char *e_ident)
 {
 	 printf(" Version: %d",
