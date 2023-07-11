@@ -1,13 +1,12 @@
 #include "main.h"
 
 /**
- * main - Entry point.
- * Description: Copies the content of a file to another file.
- * @argc: Number of arguments.
- * @argv: Array of arguments.
- * 
- * Return: 0 on success, 97-100 on failure.
- */
+* main - Entry point.
+* Description: Copies the content of a file to another file.
+* @argc: Number of arguments.
+* @argv: Array of arguments.
+* Return: 0 on success, 97-100 on failure.
+*/
 
 
 int main(int argc, char *argv[])
