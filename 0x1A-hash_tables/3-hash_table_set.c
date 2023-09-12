@@ -1,51 +1,52 @@
 #include "hash_tables.h"
+
 /**
-* hash_table_set - adds an element to a hash table
-* @ht: the table you want to add to
-* @key: the key
-* @value: the value
-* Return: 1 on success, 0 otherwise
-*/
+ * hash_table_set - function that adds an element to the hash table
+ * @ht: pointer to hash table
+ * @key: key to add the element
+ * @value: value to add the element
+ *
+ * Return: 1 if it succeeded, 0 otherwise
+ */
+
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index;
-	hash_node_t *new = NULL, *temp = NULL;
+	unsigned long int index = 0;
+	char *valuecopy, *keycopy;
+	hash_node_t  *bucket, *new_node;
 
-	if (key == NULL || key == '\0' || value == NULL || ht == NULL)
-	{
+	if (!ht || !key || !*key || !value)
 		return (0);
-	}
-	index = key_index((const unsigned char *)key, (*ht).size);
-	temp = (*ht).array[index];
-	while (temp != NULL)
+
+	valuecopy = strdup(value);
+	if (!valuecopy)
+		return (0);
+
+	index = key_index((const unsigned char *)key, ht->size);
+	bucket = ht->array[index];
+
+	while (bucket)
 	{
-		if (strcmp((*temp).key, key) == 0)
+		if (!strcmp(key, bucket->key))
 		{
-			free((*temp).value);
-			(*temp).value = strdup(value);
+			free(bucket->value);
+			bucket->value = valuecopy;
 			return (1);
 		}
-		temp = (*temp).next;
+		bucket = bucket->next;
 	}
-	new = malloc(sizeof(hash_node_t));
-	if (!new)
+	new_node = calloc(1, sizeof(hash_node_t));
+	if (new_node == NULL)
 	{
+		free(valuecopy);
 		return (0);
 	}
-	(*new).key = strdup(key);
-	if (!(*new).key)
-	{
-		free(new);
+	keycopy = strdup(key);
+	if (!keycopy)
 		return (0);
-	}
-	(*new).value = strdup(value);
-	if (!(*new).value)
-	{
-		free((*new).key);
-		free(new);
-		return (0);
-	}
-	(*new).next = (*ht).array[index];
-	(*ht).array[index] = new;
+	new_node->key = keycopy;
+	new_node->value = valuecopy;
+	new_node->next = ht->array[index];
+	ht->array[index] = new_node;
 	return (1);
 }
